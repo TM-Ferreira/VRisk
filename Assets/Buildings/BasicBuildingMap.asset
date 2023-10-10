@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820f3f59ee7915c4aa1a2b327d31934a, type: 3}
+  m_Name: BasicBuildingMap
+  m_EditorClassIdentifier: 
+  states:
+  - first: 0
+    second: 0
+    third: {fileID: -202927638816615512, guid: ae52352659c34e943807c819f74870b0, type: 3}
+  - first: 0
+    second: 1
+    third: {fileID: -202927638816615512, guid: 3b96d55662dfe904e94ecca82af5cdc5, type: 3}
+  - first: 0
+    second: 2
+    third: {fileID: 2219183105778372188, guid: f1ae0073c648d2a48a91deaf163b7aa9, type: 3}
+  - first: 0
+    second: 3
+    third: {fileID: 2219183105778372188, guid: f1ae0073c648d2a48a91deaf163b7aa9, type: 3}

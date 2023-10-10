@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fc66f224e6cd544ab30ae32c4ea459, type: 3}
+  m_Name: DebrisWindowData
+  m_EditorClassIdentifier: 
+  safe_risk_tag: White
+  low_risk_tag: Beige
+  mid_risk_tag: Yellow
+  high_risk_tag: Red
+  safe_risk_debris_max: 20
+  low_risk_debris_max: 30
+  mid_risk_debris_max: 40
+  high_risk_debris_max: 50
+  safe_risk_debris_min: 10
+  low_risk_debris_min: 20
+  mid_risk_debris_min: 30
+  high_risk_debris_min: 40
+  points_per_mesh: 10
+  direction_max_horizontal_rotation: 0
+  direction_min_horizontal_rotation: 90
+  direction_max_vertical_rotation: 45
+  direction_min_vertical_rotation: 45
+  max_force: 10
+  min_force: 5
+  debris_timeline_start: 0
+  debris_timeline_end: 30
+  timeline: {fileID: 11400000, guid: 053973cf03ac1dc4e81113e28dbf80e4, type: 2}
+  mesh_spawn_points_map: {fileID: 11400000, guid: 4eed0d0058a92d04eb34f7eac4228634,
+    type: 2}
+  building_maps:
+  - {fileID: 11400000, guid: 6231616930b440c448f260ae8671dc61, type: 2}
+  timeline_follows_earthquake_intensity_curve: 1
+  debug_prefab: {fileID: 991434971382147968, guid: a268a54a2d2c2e144b940ccbc2f395a6,
+    type: 3}
+  debug_parent_prefab: {fileID: 5162772366254443620, guid: 3ee761a4b949f1643b1fc7c0e8593e29,
+    type: 3}
+  debug_view_state: 0
