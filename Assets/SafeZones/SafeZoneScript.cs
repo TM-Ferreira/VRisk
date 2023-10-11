@@ -25,8 +25,6 @@ public class SafeZoneScript : MonoBehaviour
             nav_arrow.navigating = false;
             GameManager.Instance.DataTracker.recordTime(true);
             StartCoroutine(DelayToTransition());
-
-            Debug.Log("transition");
         }
     }
 
