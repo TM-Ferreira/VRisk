@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,9 @@ public class MovementController : MonoBehaviour
     private InputAction move_action;
     private Camera cam;
     private Rigidbody rig_rb;
+    public TransitionManager transitionManager;
+
+    [SerializeField] private float transitionDelay = 2.0f;
     
     public float min_run_input_mag = 0.7f;
     public float walk_speed = 0.5f;
@@ -43,6 +47,8 @@ public class MovementController : MonoBehaviour
         move_action = GameManager.Instance.InputHandler.input_asset.VRiskExperienceInputMap.MoveKeyStick;
         cam = Camera.main;
         rig_rb = GetComponent<Rigidbody>();
+
+        data.survived = true;
     }
 
     private void Update()
@@ -161,10 +167,20 @@ public class MovementController : MonoBehaviour
         {
             if (contact.otherCollider.gameObject.GetComponent<DebrisScript>().falling)
             {
+                //if hit by debris die
                 GameManager.Instance.AudioManager.PlaySound(false, false, head.transform.position, AudioManager.SoundID.LOSE);
                 GameManager.Instance.DataTracker.startSavingProcess(false);
-                //Debug.Log("die");
+                data.survived = false;
+                StartCoroutine(DelayToTransition());
             }
         }
+    }
+    
+    private IEnumerator DelayToTransition()
+    {
+        yield return new WaitForSeconds(transitionDelay);
+
+        data.NextScene = (int) GameData.SceneIndex.END_MENU;
+        transitionManager.LoadNextScene();
     }
 }

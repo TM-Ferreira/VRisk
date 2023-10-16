@@ -266,14 +266,14 @@ namespace Editor
                     foreach (Transform state in building.transform)
                     {
                         if (state.gameObject.CompareTag("Ignore")) continue;
-                        
+
                         var buildMatProp = state.gameObject.GetComponent<SetNewMaterial>();
 
-                        if (state.gameObject.CompareTag(_notAffectedTag)) buildMatProp.ChangeMaterial(unaffectedMat);
-                        else if (state.gameObject.CompareTag(_safeRiskTag)) buildMatProp.ChangeMaterial(safeMat);
-                        else if (state.gameObject.CompareTag(_lowRiskTag)) buildMatProp.ChangeMaterial(affectedMat);
-                        else if (state.gameObject.CompareTag(_midRiskTag)) buildMatProp.ChangeMaterial(damagedMat);
-                        else if (state.gameObject.CompareTag(_highRiskTag)) buildMatProp.ChangeMaterial(destroyedMat);
+                        if (building.CompareTag(_notAffectedTag)) buildMatProp.ChangeMaterial(unaffectedMat);
+                        else if (building.CompareTag(_safeRiskTag)) buildMatProp.ChangeMaterial(safeMat);
+                        else if (building.CompareTag(_lowRiskTag)) buildMatProp.ChangeMaterial(affectedMat);
+                        else if (building.CompareTag(_midRiskTag)) buildMatProp.ChangeMaterial(damagedMat);
+                        else if (building.CompareTag(_highRiskTag)) buildMatProp.ChangeMaterial(destroyedMat);
                     }
                 }
             }

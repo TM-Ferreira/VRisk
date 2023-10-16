@@ -21,7 +21,7 @@ public class SafeZoneScript : MonoBehaviour
             // Celebrate
             GameManager.Instance.AudioManager.PlaySound(false, false, head.transform.position, AudioManager.SoundID.WIN);
             celebration_effects.SetActive(true);
-
+            
             nav_arrow.navigating = false;
             GameManager.Instance.DataTracker.recordTime(true);
             StartCoroutine(DelayToTransition());

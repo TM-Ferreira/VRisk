@@ -34,6 +34,9 @@ public class GameData : ScriptableObject
     public int sensibility = 12;
     public MovementType movementType = MovementType.JOYSTICK;
     
+    // Survival
+    public bool survived = true;
+    
     private void Awake()
     {
         NextScene = 1;
