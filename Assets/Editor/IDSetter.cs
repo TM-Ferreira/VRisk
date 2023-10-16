@@ -5,11 +5,17 @@ namespace Editor
 {
     public class IDSetter : EditorWindow
     {
-        private string not_affected_tag = "White";
-        private string safe_risk_tag = "Black";
-        private string low_risk_tag = "Beige";
-        private string mid_risk_tag = "Yellow";
-        private string high_risk_tag = "Red";
+        [SerializeField] private Material unaffectedMat;
+        [SerializeField] private Material safeMat;
+        [SerializeField] private Material affectedMat;
+        [SerializeField] private Material damagedMat;
+        [SerializeField] private Material destroyedMat;
+
+        private readonly string _notAffectedTag = "White";
+        private readonly string _safeRiskTag = "Black";
+        private readonly string _lowRiskTag = "Beige";
+        private readonly string _midRiskTag = "Yellow";
+        private readonly string _highRiskTag = "Red";
 
         private SetCompositeBuildingProperties.BuildingState currentSelected = SetCompositeBuildingProperties.BuildingState.BASE;
         private DebrisSelector.DebrisLevel levelSelected = DebrisSelector.DebrisLevel.NONE;
@@ -28,11 +34,11 @@ namespace Editor
 
             EditorGUILayout.Space(10);
 
-            EditorGUILayout.TextField("Unaffected tag: ", not_affected_tag);
-            EditorGUILayout.TextField("Safe tag: ", safe_risk_tag);
-            EditorGUILayout.TextField("Low risk tag: ", low_risk_tag);
-            EditorGUILayout.TextField("Mid risk tag: ", mid_risk_tag);
-            EditorGUILayout.TextField("High risk tag: ", high_risk_tag);
+            EditorGUILayout.TextField("Unaffected tag: ", _notAffectedTag);
+            EditorGUILayout.TextField("Safe tag: ", _safeRiskTag);
+            EditorGUILayout.TextField("Low risk tag: ", _lowRiskTag);
+            EditorGUILayout.TextField("Mid risk tag: ", _midRiskTag);
+            EditorGUILayout.TextField("High risk tag: ", _highRiskTag);
 
             EditorGUILayout.Space(10);
 
@@ -63,17 +69,26 @@ namespace Editor
             EditorGUILayout.Space(10);
             
             if (GUILayout.Button("Optimize Tiles")) RemoveExcessTiles();
+            
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+            EditorGUILayout.Space(10);
+
+            GUILayout.Label("Do this only in ScrubTrough scene!", EditorStyles.largeLabel);
+            
+            if (GUILayout.Button("Color accordingly to danger level")) ColorAccordingly();
+            
         }
 
         private GameObject[][] ReturnBuildings()
         {
             GameObject[][] buildings = new GameObject[5][];
             
-            buildings[0] = GameObject.FindGameObjectsWithTag(not_affected_tag);
-            buildings[1] = GameObject.FindGameObjectsWithTag(safe_risk_tag);
-            buildings[2] = GameObject.FindGameObjectsWithTag(low_risk_tag);
-            buildings[3] = GameObject.FindGameObjectsWithTag(mid_risk_tag);
-            buildings[4] = GameObject.FindGameObjectsWithTag(high_risk_tag);
+            buildings[0] = GameObject.FindGameObjectsWithTag(_notAffectedTag);
+            buildings[1] = GameObject.FindGameObjectsWithTag(_safeRiskTag);
+            buildings[2] = GameObject.FindGameObjectsWithTag(_lowRiskTag);
+            buildings[3] = GameObject.FindGameObjectsWithTag(_midRiskTag);
+            buildings[4] = GameObject.FindGameObjectsWithTag(_highRiskTag);
 
             return buildings;
         }
@@ -81,35 +96,35 @@ namespace Editor
         private void SetIDs(bool reset)
         {
             GameObject[][] buildings = ReturnBuildings();
-            int current_id = 0;
+            int currentID = 0;
             
             for (int i = 0; i < 5; i++)
             {
                 foreach (var building in buildings[i])
                 {
-                    var building_data = building.GetComponent<BuildingData>();
+                    var buildingData = building.GetComponent<BuildingData>();
                 
                     switch (i)
                     {
                         case 0:
-                            building.name = "UnaffectedBuilding(" + current_id + ")";
+                            building.name = "UnaffectedBuilding(" + currentID + ")";
                             break;
                         case 1:
-                            building.name = "SafeBuilding(" + current_id + ")";
+                            building.name = "SafeBuilding(" + currentID + ")";
                             break;
                         case 2:
-                            building.name = "LowRiskBuilding(" + current_id + ")";
+                            building.name = "LowRiskBuilding(" + currentID + ")";
                             break;
                         case 3:
-                            building.name = "MidRiskBuilding(" + current_id + ")";
+                            building.name = "MidRiskBuilding(" + currentID + ")";
                             break;
                         case 4:
-                            building.name = "HighRiskBuilding(" + current_id + ")";
+                            building.name = "HighRiskBuilding(" + currentID + ")";
                             break;
                     }
 
-                    building_data.id = reset ? 0 : current_id;
-                    current_id++;
+                    buildingData.id = reset ? 0 : currentID;
+                    currentID++;
                 }
             }
         }
@@ -122,10 +137,10 @@ namespace Editor
             {
                 foreach (var building in buildings[i])
                 {
-                    var build_prop = building.GetComponent<SetCompositeBuildingProperties>();
+                    var buildProp = building.GetComponent<SetCompositeBuildingProperties>();
                     
-                    build_prop.SetPavement(active);
-                    build_prop.ChangeProperties();
+                    buildProp.SetPavement(active);
+                    buildProp.ChangeProperties();
                 }
             }
         }
@@ -138,10 +153,10 @@ namespace Editor
             {
                 foreach (var building in buildings[i])
                 {
-                    var build_prop = building.GetComponent<SetCompositeBuildingProperties>();
+                    var buildProp = building.GetComponent<SetCompositeBuildingProperties>();
 
-                    build_prop.SetColor((SetNewMaterial.MaterialSelection)Random.Range(0, 5));
-                    build_prop.ChangeProperties();
+                    buildProp.SetColor((SetNewMaterial.MaterialSelection)Random.Range(0, 5));
+                    buildProp.ChangeProperties();
                 }
             }
         }
@@ -154,11 +169,11 @@ namespace Editor
             {
                 foreach (var building in buildings[i])
                 {
-                    var build_prop = building.GetComponent<SetCompositeBuildingProperties>();
+                    var buildProp = building.GetComponent<SetCompositeBuildingProperties>();
                     
-                    build_prop.SetState(grade);
-                    build_prop.SetCurrentState();
-                    build_prop.ChangeProperties();
+                    buildProp.SetState(grade);
+                    buildProp.SetCurrentState();
+                    buildProp.ChangeProperties();
                 }
             }
         }
@@ -171,9 +186,9 @@ namespace Editor
             {
                 foreach (var building in buildings[i])
                 {
-                    var build_prop = building.GetComponent<SetCompositeBuildingProperties>();
+                    var buildProp = building.GetComponent<SetCompositeBuildingProperties>();
                     
-                    build_prop.SetMaxDebrisLevel(level);
+                    buildProp.SetMaxDebrisLevel(level);
                 }
             }
         }
@@ -186,10 +201,10 @@ namespace Editor
             {
                 foreach (var building in buildings[i])
                 {
-                    var build_prop = building.GetComponent<SetCompositeBuildingProperties>();
+                    var buildProp = building.GetComponent<SetCompositeBuildingProperties>();
                     
-                    build_prop.SetCurrentDebrisLevel(DebrisSelector.DebrisLevel.NONE);
-                    build_prop.UpdateDebrisLevel();
+                    buildProp.SetCurrentDebrisLevel(DebrisSelector.DebrisLevel.NONE);
+                    buildProp.UpdateDebrisLevel();
                 }
             }
         }
@@ -235,6 +250,30 @@ namespace Editor
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        private void ColorAccordingly()
+        {
+            GameObject[][] buildings = ReturnBuildings();
+
+            for (int i = 0; i < 5; i++)
+            {
+                foreach (var building in buildings[i])
+                {
+                    foreach (Transform state in building.transform)
+                    {
+                        if (state.gameObject.CompareTag("Ignore")) continue;
+                        
+                        var buildMatProp = state.gameObject.GetComponent<SetNewMaterial>();
+
+                        if (state.gameObject.CompareTag(_notAffectedTag)) buildMatProp.ChangeMaterial(unaffectedMat);
+                        else if (state.gameObject.CompareTag(_safeRiskTag)) buildMatProp.ChangeMaterial(safeMat);
+                        else if (state.gameObject.CompareTag(_lowRiskTag)) buildMatProp.ChangeMaterial(affectedMat);
+                        else if (state.gameObject.CompareTag(_midRiskTag)) buildMatProp.ChangeMaterial(damagedMat);
+                        else if (state.gameObject.CompareTag(_highRiskTag)) buildMatProp.ChangeMaterial(destroyedMat);
                     }
                 }
             }

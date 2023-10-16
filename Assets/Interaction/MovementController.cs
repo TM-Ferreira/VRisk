@@ -163,7 +163,7 @@ public class MovementController : MonoBehaviour
             {
                 GameManager.Instance.AudioManager.PlaySound(false, false, head.transform.position, AudioManager.SoundID.LOSE);
                 GameManager.Instance.DataTracker.startSavingProcess(false);
-                Debug.Log("die");
+                //Debug.Log("die");
             }
         }
     }

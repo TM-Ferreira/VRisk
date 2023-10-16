@@ -64,4 +64,9 @@ public class SetNewMaterial : MonoBehaviour
         
         pavement.SetActive(pavementEnabled);
     }
+
+    public void ChangeMaterial(Material customMat)
+    {
+        meshRend.material = customMat;
+    }
 }

@@ -1,1 +1,2 @@
 GameScene.unity filter=lfs diff=lfs merge=lfs -text
+Buildings.prefab filter=lfs diff=lfs merge=lfs -text
