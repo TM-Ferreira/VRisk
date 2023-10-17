@@ -135,12 +135,7 @@ namespace DataVisualiser
 
             _script_data.finish_state.text = _completion_state;
             _script_data.finish_state.color = _script_data.survived ? Color.green : Color.red;
-
-            float completion_in_seconds = float.Parse(_completion_time);
-            int milliseconds = (int)Math.Round(completion_in_seconds * 1000) % 1000;
-            int seconds = (int)Math.Round(completion_in_seconds % 60);
-            int minutes = (int)Math.Round(completion_in_seconds / 60);
-            _script_data.time_to_completion.text = "Time: " + minutes.ToString("D2") + "m : " + seconds.ToString("D2") + "s : " + milliseconds.ToString("D3") + "ms";
+            _script_data.time_to_completion.text = "Time: " + TimeSpan.FromSeconds(float.Parse(_completion_time)).ToString(@"mm\:ss\:fff");;
         }
         
         public void unloadData()
