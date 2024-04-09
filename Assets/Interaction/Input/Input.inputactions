@@ -402,6 +402,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "8d65bcf4-3761-4699-8a91-6e060e49c03a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "MouseDelta",
                     "type": "Value",
                     "id": "445a610a-e3a2-4bf2-9b60-084e9a91f6b4",
@@ -570,6 +579,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleOrthoPerspective",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1fe6a8e3-bc31-4ead-a070-a6d25cf03ca2",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

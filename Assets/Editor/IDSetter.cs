@@ -78,6 +78,9 @@ namespace Editor
             
             if (GUILayout.Button("Color accordingly to danger level")) ColorAccordingly();
             
+            EditorGUILayout.Space(10);
+            
+            if (GUILayout.Button("Box Out Mesh Cube")) BoxOutBuildings();
         }
 
         private GameObject[][] ReturnBuildings()
@@ -274,6 +277,25 @@ namespace Editor
                         else if (building.CompareTag(_lowRiskTag)) buildMatProp.ChangeMaterial(affectedMat);
                         else if (building.CompareTag(_midRiskTag)) buildMatProp.ChangeMaterial(damagedMat);
                         else if (building.CompareTag(_highRiskTag)) buildMatProp.ChangeMaterial(destroyedMat);
+                    }
+                }
+            }
+        }
+        
+        private void BoxOutBuildings()
+        {
+            GameObject[][] buildings = ReturnBuildings();
+
+            for (int i = 0; i < 5; i++)
+            {
+                foreach (var building in buildings[i])
+                {
+                    foreach (Transform state in building.transform)
+                    {
+                        bool toRender = state.gameObject.name is "MeshCube";
+
+                        var objRenderer = state.gameObject.GetComponent<Renderer>();
+                        objRenderer.gameObject.SetActive(toRender);
                     }
                 }
             }

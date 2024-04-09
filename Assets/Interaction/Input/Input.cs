@@ -424,6 +424,15 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""8d65bcf4-3761-4699-8a91-6e060e49c03a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""MouseDelta"",
                     ""type"": ""Value"",
                     ""id"": ""445a610a-e3a2-4bf2-9b60-084e9a91f6b4"",
@@ -594,6 +603,17 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleOrthoPerspective"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fe6a8e3-bc31-4ead-a070-a6d25cf03ca2"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -619,6 +639,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
         m_DataVisualiserInputMap_ZoomView = m_DataVisualiserInputMap.FindAction("ZoomView", throwIfNotFound: true);
         m_DataVisualiserInputMap_RotateView = m_DataVisualiserInputMap.FindAction("RotateView", throwIfNotFound: true);
         m_DataVisualiserInputMap_MoveView = m_DataVisualiserInputMap.FindAction("MoveView", throwIfNotFound: true);
+        m_DataVisualiserInputMap_MousePosition = m_DataVisualiserInputMap.FindAction("MousePosition", throwIfNotFound: true);
         m_DataVisualiserInputMap_MouseDelta = m_DataVisualiserInputMap.FindAction("MouseDelta", throwIfNotFound: true);
         m_DataVisualiserInputMap_Faster = m_DataVisualiserInputMap.FindAction("Faster", throwIfNotFound: true);
         m_DataVisualiserInputMap_ToggleOrthoPerspective = m_DataVisualiserInputMap.FindAction("ToggleOrthoPerspective", throwIfNotFound: true);
@@ -798,6 +819,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
     private readonly InputAction m_DataVisualiserInputMap_ZoomView;
     private readonly InputAction m_DataVisualiserInputMap_RotateView;
     private readonly InputAction m_DataVisualiserInputMap_MoveView;
+    private readonly InputAction m_DataVisualiserInputMap_MousePosition;
     private readonly InputAction m_DataVisualiserInputMap_MouseDelta;
     private readonly InputAction m_DataVisualiserInputMap_Faster;
     private readonly InputAction m_DataVisualiserInputMap_ToggleOrthoPerspective;
@@ -809,6 +831,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
         public InputAction @ZoomView => m_Wrapper.m_DataVisualiserInputMap_ZoomView;
         public InputAction @RotateView => m_Wrapper.m_DataVisualiserInputMap_RotateView;
         public InputAction @MoveView => m_Wrapper.m_DataVisualiserInputMap_MoveView;
+        public InputAction @MousePosition => m_Wrapper.m_DataVisualiserInputMap_MousePosition;
         public InputAction @MouseDelta => m_Wrapper.m_DataVisualiserInputMap_MouseDelta;
         public InputAction @Faster => m_Wrapper.m_DataVisualiserInputMap_Faster;
         public InputAction @ToggleOrthoPerspective => m_Wrapper.m_DataVisualiserInputMap_ToggleOrthoPerspective;
@@ -833,6 +856,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 @MoveView.started -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMoveView;
                 @MoveView.performed -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMoveView;
                 @MoveView.canceled -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMoveView;
+                @MousePosition.started -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMousePosition;
                 @MouseDelta.started -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.performed -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.canceled -= m_Wrapper.m_DataVisualiserInputMapActionsCallbackInterface.OnMouseDelta;
@@ -858,6 +884,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 @MoveView.started += instance.OnMoveView;
                 @MoveView.performed += instance.OnMoveView;
                 @MoveView.canceled += instance.OnMoveView;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
                 @MouseDelta.started += instance.OnMouseDelta;
                 @MouseDelta.performed += instance.OnMouseDelta;
                 @MouseDelta.canceled += instance.OnMouseDelta;
@@ -891,6 +920,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
         void OnZoomView(InputAction.CallbackContext context);
         void OnRotateView(InputAction.CallbackContext context);
         void OnMoveView(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnFaster(InputAction.CallbackContext context);
         void OnToggleOrthoPerspective(InputAction.CallbackContext context);
