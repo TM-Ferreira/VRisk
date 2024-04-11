@@ -292,10 +292,25 @@ namespace Editor
                 {
                     foreach (Transform state in building.transform)
                     {
-                        bool toRender = state.gameObject.name is "MeshCube";
-
-                        var objRenderer = state.gameObject.GetComponent<Renderer>();
-                        objRenderer.gameObject.SetActive(toRender);
+                
+                        Debug.Log(state.gameObject.name);
+                        
+                        if (state.gameObject.name is "MeshCube")
+                        {
+                            Material newMat = safeMat;
+                            if (building.CompareTag(_notAffectedTag)) newMat = unaffectedMat;
+                            else if (building.CompareTag(_safeRiskTag)) newMat = safeMat;
+                            else if (building.CompareTag(_lowRiskTag)) newMat = affectedMat;
+                            else if (building.CompareTag(_midRiskTag)) newMat = damagedMat;
+                            else if (building.CompareTag(_highRiskTag)) newMat = destroyedMat;
+                            
+                            state.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                            state.gameObject.GetComponent<MeshRenderer>().material = newMat;
+                        }
+                        else
+                        {
+                            state.gameObject.SetActive(false);
+                        }
                     }
                 }
             }
