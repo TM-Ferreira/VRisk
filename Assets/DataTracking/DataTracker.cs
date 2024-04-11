@@ -49,21 +49,27 @@ public class DataTracker : MonoBehaviour
         data = GameManager.Instance.Data;
         record_position_interval = data.record_position_interval;
         grid_cell_size = new Vector2(data.grid_cell_size_x, data.grid_cell_size_y);
+        
+        Debug.Log(record_position_interval);
     }
 
     private void Update()
     {
-        if (active)
+        if (!active) return;
+        
+        timer += Time.deltaTime;
+        timer_display.updateTimer(timer);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!active) return;
+        
+        record_position_timer += Time.fixedDeltaTime;
+        if (record_position_timer >= record_position_interval)
         {
-            timer += Time.deltaTime;
-            timer_display.updateTimer(timer);
-            
-            record_position_timer += Time.deltaTime;
-            if (record_position_timer > record_position_interval)
-            {
-                recordDataPoint();
-                record_position_timer = 0f;
-            }
+            recordDataPoint();
+            record_position_timer = 0f;
         }
     }
 

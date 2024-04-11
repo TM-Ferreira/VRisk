@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3c3f0dc1cce7c409a404aee67f18a5, type: 3}
   m_Name: GameDataSO
   m_EditorClassIdentifier: 
-  time: 55.11901
-  NextScene: 1
-  record_position_interval: 1
+  time: 39.93884
+  NextScene: 3
+  record_position_interval: 0.1
   grid_cell_size_x: 10
   grid_cell_size_y: 10
   user_name: 
@@ -22,3 +22,4 @@ MonoBehaviour:
   turnSpeed: 3
   sensibility: 12
   movementType: 0
+  survived: 1

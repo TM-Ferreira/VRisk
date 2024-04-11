@@ -147,7 +147,6 @@ namespace DataVisualiser
             
             playthroughs.Clear();
             playthrough_button_container.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (tab_height + tab_gap) * (playthroughs.Count + 1) + tab_gap);
-
         }
         
         public void setSelectionForAll(bool _select)
